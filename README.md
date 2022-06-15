@@ -1,5 +1,5 @@
-# Poi_Sample_Java
-Apache Poiで遊ぶ
+# Poi_Arbitrary_order
+Apache Poiで任意の表示順で出力する。
 
 ## 実行
 
