@@ -13,14 +13,15 @@
     <maven.compiler.target>${java.version}</maven.compiler.target>
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.mainClass>sample.poi.App</project.mainClass>
 
     <poi.version>5.2.2</poi.version>
+    <apache.commons-lang3.version>3.12.0</apache.commons-lang3.version>
     <log4j2.version>2.17.2</log4j2.version>
     <lombok.version>1.18.24</lombok.version>
     <jackson.version>2.13.3</jackson.version>
     <junit.version>4.13.2</junit.version>
     <hamcrest.version>2.2</hamcrest.version>
+
   </properties>
 
   <dependencies>
@@ -35,6 +36,14 @@
       <artifactId>poi-ooxml</artifactId>
       <version>${poi.version}</version>
     </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>${apache.commons-lang3.version}</version>
+    </dependency>
+
 
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>
@@ -94,7 +103,6 @@
         <artifactId>exec-maven-plugin</artifactId>
         <version>1.2.1</version>
         <configuration>
-          <mainClass>${project.mainClass}</mainClass>
         </configuration>
       </plugin>
     </plugins>

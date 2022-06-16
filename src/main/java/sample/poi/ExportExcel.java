@@ -14,12 +14,19 @@ import java.nio.file.Paths;
 import java.io.FileOutputStream;
 
 import java.util.Date;
+import java.util.List;
+import java.util.ArrayList;
 import java.text.SimpleDateFormat;
+
+import sample.poi.model.data.*;
+
+import java.io.IOException;
+import java.text.ParseException;
 
 /**
  * Apache POI サンプル
  */
-public class App {
+public class ExportExcel {
     
     private Logger logger = LogManager.getLogger();
 
@@ -43,7 +50,7 @@ public class App {
             cell.setCellStyle(cellStyle);
  
             // セルに書き込み
-            cell.setCellValue("Hello World!\tHello World2!");
+            cell.setCellValue("Hello World!");
  
             SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd_HHmmss");
             String exportPath
@@ -73,7 +80,25 @@ public class App {
         }
     }
     
+    public List<DataModel> createDataModel() throws ParseException {
+        // TODO データは増やす。
+        List<DataModel> list = new ArrayList<DataModel>();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        int index = 1;
+        list.add(new DataModel(
+            new CommonModel(index++, "aaa", format.parse("2022-06-01"), format.parse("2022-06-02")),
+            new Group01Model("g01_value1_01", "g01_value2_01"),
+            new Group02Model("g02_value1_01", "g02_value2_01")
+        ));
+        list.add(new DataModel(
+            new CommonModel(index++, "bbb", format.parse("2022-06-03"), format.parse("2022-06-04")),
+            new Group01Model("g01_value1_02", "g01_value2_02"),
+            new Group02Model("g02_value1_02", "g02_value2_02")
+        ));
+        return list;
+    }
+    
     public static void main( String[] args ) {
-        new App().exec(args);
+        
     }
 }
