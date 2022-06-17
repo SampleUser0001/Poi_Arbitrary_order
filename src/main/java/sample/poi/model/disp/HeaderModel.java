@@ -9,6 +9,7 @@ import java.util.List;
 import java.io.Serializable;
 import org.apache.commons.lang3.SerializationUtils;
 
+import java.util.Collections;
 import java.util.stream.Collectors;
 
 @Data
@@ -35,5 +36,21 @@ public class HeaderModel implements Serializable {
                              .collect(Collectors.toList());
         Collections.sort(workList, new ColumnInfoModel());
         return workList;
+    }
+    
+    public String getHeaderToString(String delimiter) {
+        List<ColumnInfoModel> orderedList = this.getHeaderListOrderByColumnOrder();
+        String first = orderedList.stream()
+                                  .filter(model -> model.isVisible())
+                                  .map(model -> model.getDispName().getFirst())
+                                  .collect(Collectors.joining(delimiter)) + "\r\n";
+        String second = "";
+        if (this.headerLine == 2) {
+            second = orderedList.stream()
+                                .filter(model -> model.isVisible())
+                                .map(model -> model.getDispName().getSecond())
+                                .collect(Collectors.joining(delimiter)) + "\r\n";
+        }
+        return first + second;
     }
 }

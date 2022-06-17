@@ -26,6 +26,6 @@ public class ColumnInfoModel implements Serializable, Comparator<ColumnInfoModel
     
     @Override
     public int compare(ColumnInfoModel order1, ColumnInfoModel order2) {
-        return order2.columnOrder - order1.columnOrder;
+        return order1.columnOrder - order2.columnOrder;
     }
 }
