@@ -13,8 +13,5 @@ import java.io.Serializable;
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ColumnDispNameModel implements Serializable {
-    private String first;
-
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    private String second;
+    private String name;
 }

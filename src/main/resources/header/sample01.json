@@ -3,13 +3,13 @@
     "format_id" : "sample01",
     "header_line" : 2,
     "headers" : [
-        { "name": { "first" : "Column01", "second" : "Column01" } , "caption" : "Column01"        , "visible" : true  , "column_order" : 1 } ,
-        { "name": { "first" : "Column02", "second" : "Column02" } , "caption" : "Column02"        , "visible" : false , "column_order" : 8 } ,
-        { "name": { "first" : "From",     "second" : "From"     } , "caption" : "From"            , "visible" : true  , "column_order" : 2 } ,
-        { "name": { "first" : "To",       "second" : "To"       } , "caption" : "To"              , "visible" : true  , "column_order" : 5 } ,
-        { "name": { "first" : "Group01",  "second" : "value01"  } , "caption" : "Group01_value01" , "visible" : true  , "column_order" : 3 } ,
-        { "name": { "first" : "Group01",  "second" : "value02"  } , "caption" : "Group01_value02" , "visible" : false , "column_order" : 4 } ,
-        { "name": { "first" : "Group02",  "second" : "value01"  } , "caption" : "Group02_value01" , "visible" : true  , "column_order" : 6 } ,
-        { "name": { "first" : "Group02",  "second" : "value02"  } , "caption" : "Group02_value02" , "visible" : true  , "column_order" : 7 } 
+        { "names": [ { "name" : "Column01" } , { "name" : "Column01" } ] , "caption" : "Column01"        , "visible" : true  , "column_order" : 1 } ,
+        { "names": [ { "name" : "Column02" } , { "name" : "Column02" } ] , "caption" : "Column02"        , "visible" : false , "column_order" : 8 } ,
+        { "names": [ { "name" : "From"     } , { "name" : "From"     } ] , "caption" : "From"            , "visible" : true  , "column_order" : 2 } ,
+        { "names": [ { "name" : "To"       } , { "name" : "To"       } ] , "caption" : "To"              , "visible" : true  , "column_order" : 5 } ,
+        { "names": [ { "name" : "Group01"  } , { "name" : "value01"  } ] , "caption" : "Group01_value01" , "visible" : true  , "column_order" : 3 } ,
+        { "names": [ { "name" : "Group01"  } , { "name" : "value02"  } ] , "caption" : "Group01_value02" , "visible" : false , "column_order" : 4 } ,
+        { "names": [ { "name" : "Group02"  } , { "name" : "value01"  } ] , "caption" : "Group02_value01" , "visible" : true  , "column_order" : 6 } ,
+        { "names": [ { "name" : "Group02"  } , { "name" : "value02"  } ] , "caption" : "Group02_value02" , "visible" : true  , "column_order" : 7 } 
     ]
 }

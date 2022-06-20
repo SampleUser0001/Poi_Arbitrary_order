@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Comparator;
 
 @Data
@@ -13,8 +14,8 @@ import java.util.Comparator;
 @AllArgsConstructor
 public class ColumnInfoModel implements Serializable, Comparator<ColumnInfoModel> {
     
-    @JsonProperty("name")
-    private ColumnDispNameModel dispName;
+    @JsonProperty("names")
+    private List<ColumnDispNameModel> dispName;
 
     private String caption;
 
