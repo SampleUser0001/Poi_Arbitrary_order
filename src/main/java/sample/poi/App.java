@@ -43,7 +43,7 @@ public class App {
             cell.setCellStyle(cellStyle);
  
             // セルに書き込み
-            cell.setCellValue("Hello World!\tHello World2!");
+            cell.setCellValue(1);
  
             String exportPath
                 = Paths.get(

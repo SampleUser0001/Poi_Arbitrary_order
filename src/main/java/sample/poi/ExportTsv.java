@@ -38,8 +38,9 @@ public class ExportTsv {
                 Charset.forName("UTF-8"),
                 StandardOpenOption.CREATE)) {
                 
-            writer.write(headerModel.getHeaderToString(delimiter));
-            List<ColumnInfoModel> orderdColumnInfoList = headerModel.getHeaderListOrderByColumnOrder();
+            writer.write(headerModel.getHeaderToString(delimiter, false));
+            List<ColumnInfoModel> orderdColumnInfoList = headerModel.getHeaderListOrderByColumnOrder()
+                                                                    .collect(Collectors.toList());
             for(DataModel dataModel : dataList) {
                 List<Object> valueList = new ArrayList<Object>();
                 for(ColumnInfoModel columnInfoModel : orderdColumnInfoList) {
