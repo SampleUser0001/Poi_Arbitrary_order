@@ -1,0 +1,13 @@
+{
+    "user_id" : "hogehoge",
+    "format_id" : "sample02",
+    "header_line" : 1,
+    "headers" : [
+        { "name" : { "first" : "Column01" } , "caption" : "Column01" , "visible" : true  , "column_order" : 1 },
+        { "name" : { "first" : "Column02" } , "caption" : "Column02" , "visible" : false , "column_order" : 2 },
+        { "name" : { "first" : "From"     } , "caption" : "From"     , "visible" : true  , "column_order" : 3 },
+        { "name" : { "first" : "To"       } , "caption" : "To"       , "visible" : true  , "column_order" : 4 },
+        { "name" : { "first" : "value01"  } , "caption" : "value01"  , "visible" : false , "column_order" : 5 },
+        { "name" : { "first" : "value02"  } , "caption" : "value02"  , "visible" : true  , "column_order" : 6 }
+    ]
+}
