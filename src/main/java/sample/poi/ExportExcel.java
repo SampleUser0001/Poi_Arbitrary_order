@@ -74,20 +74,20 @@ public class ExportExcel {
             }
 
             // データ部生成
-            // List<DataModel> dataList = Util.getDatas();
-            // for(int i=0 ; i < dataList.size() ; i++ , lineCounter++){
-            //     XSSFRow row = this.sheet.createRow(lineCounter);
-            //     for(int j=0 ; j < columnInfoList.size() ; j++) {
-            //         final int columnIndex = j + COLUMN_BASE;
+            List<DataModel> dataList = Util.getDatas();
+            for(int i=0 ; i < dataList.size() ; i++ , lineCounter++){
+                XSSFRow row = this.sheet.createRow(lineCounter);
+                for(int j=0 ; j < columnInfoList.size() ; j++) {
+                    final int columnIndex = j + COLUMN_BASE;
 
-            //         StyleModel style = new StyleModel();
-            //         style.setFont(FontStyle.MS_Gothic);
+                    StyleModel style = new StyleModel();
+                    style.setFont(FontStyle.MS_Gothic);
 
-            //         XSSFCell cell = row.createCell(columnIndex);
-            //         cell.setCellStyle(this.styleFactory.create(style));
-            //         cell.setCellValue(dataList.get(i).get(columnInfoList.get(j).getCaption()));
-            //     }
-            // }
+                    XSSFCell cell = row.createCell(columnIndex);
+                    cell.setCellStyle(this.styleFactory.create(style));
+                    dataList.get(i).setCellValue(cell, columnInfoList.get(j).getCaption());
+                }
+            }
  
             // ファイル書き込み
             workbook.write(fos);

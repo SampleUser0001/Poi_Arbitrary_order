@@ -43,7 +43,7 @@ public class App {
             cell.setCellStyle(cellStyle);
  
             // セルに書き込み
-            cell.setCellValue(1);
+            cell.setCellValue(new Date());
  
             String exportPath
                 = Paths.get(

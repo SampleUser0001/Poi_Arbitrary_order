@@ -13,7 +13,7 @@
     <maven.compiler.target>${java.version}</maven.compiler.target>
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.mainClass>sample.poi.App</project.mainClass>
+    <project.mainClass>sample.poi.ExportExcel</project.mainClass>
 
     <poi.version>5.2.2</poi.version>
     <apache.commons-lang3.version>3.12.0</apache.commons-lang3.version>
