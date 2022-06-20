@@ -9,12 +9,17 @@ import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.nio.file.Paths;
 import java.io.FileOutputStream;
-
 import java.util.List;
+import java.util.stream.Collectors;
+import java.nio.file.Paths;
+
 import sample.poi.model.data.DataModel;
 import sample.poi.model.disp.HeaderModel;
+import sample.poi.model.disp.ColumnInfoModel;
+import sample.poi.model.style.StyleModel;
+import sample.poi.factory.StyleFactory;
+import sample.poi.enums.FontStyle;
 
 import sample.poi.util.Util;
 
@@ -25,53 +30,73 @@ public class ExportExcel {
     private Logger logger = LogManager.getLogger();
 
     private static final String DELIMITER = "\t";
+    /** 行番を出力するかどうか */
     private static final boolean LINE_NUMBER = true;
 
-    private static final String FONT_NAME = "ＭＳ ゴシック";
+    private XSSFWorkbook workbook;
+    private XSSFSheet sheet;
+    private StyleFactory styleFactory;
 
     public void exec(String[] args) throws IOException, ParseException {
-        HeaderModel headerModel = Util.getHeader("sample01.json");
-        List<DataModel> dataList = Util.getDatas();
 
-        XSSFWorkbook workbook = new XSSFWorkbook();
         try(FileOutputStream fos = new FileOutputStream(this.getExportPath());) {
-            XSSFSheet sheet = workbook.createSheet();
-            // int lineCounter = 0;
-            // final int COLUMN_BASE = LINE_NUMBER ? 0 : 1;
-            
-            // // ヘッダ生成
-            // for(ColumnInfoModel column : headerModel.getHeaderListOrderByColumnOrder()) {
 
-                
-            //     if(headerModel.getHeaderLine == 2){
-            //         // 2行目を生成する。
+            int lineCounter = 0;
+            final int COLUMN_BASE = LINE_NUMBER ? 1 : 0;
+            
+            // ヘッダ生成
+            HeaderModel headerModel = Util.getHeader("sample01.json");
+            List<ColumnInfoModel> columnInfoList
+                = headerModel.getHeaderListOrderByColumnOrder()
+                             .collect(Collectors.toList());
+            for(;lineCounter < headerModel.getHeaderLine();lineCounter++){
+                XSSFRow row = this.sheet.createRow(lineCounter);
+                for(int i=0 ; i < columnInfoList.size() ; i++) {
+                    final int columnIndex = i + COLUMN_BASE;
+                    if(lineCounter == 0) {
+                        this.sheet.setColumnHidden(columnIndex, !columnInfoList.get(i).isVisible());
+                    }
+
+                    StyleModel style = new StyleModel();
+                    style.setFont(FontStyle.MS_Gothic);
+
+                    logger.info(
+                        "line:{}, column:{}, value:{}, style:{}",
+                        lineCounter,
+                        columnIndex,
+                        columnInfoList.get(i).getDispName().get(lineCounter).getName(),
+                        style);
+
+                    XSSFCell cell = row.createCell(columnIndex);
+                    cell.setCellStyle(this.styleFactory.create(style));
+                    cell.setCellValue(columnInfoList.get(i).getDispName().get(lineCounter).getName());
+                }
+            }
+
+            // データ部生成
+            // List<DataModel> dataList = Util.getDatas();
+            // for(int i=0 ; i < dataList.size() ; i++ , lineCounter++){
+            //     XSSFRow row = this.sheet.createRow(lineCounter);
+            //     for(int j=0 ; j < columnInfoList.size() ; j++) {
+            //         final int columnIndex = j + COLUMN_BASE;
+
+            //         StyleModel style = new StyleModel();
+            //         style.setFont(FontStyle.MS_Gothic);
+
+            //         XSSFCell cell = row.createCell(columnIndex);
+            //         cell.setCellStyle(this.styleFactory.create(style));
+            //         cell.setCellValue(dataList.get(i).get(columnInfoList.get(j).getCaption()));
             //     }
             // }
-
-            // lineCounter += headerModel.getHeaderLine();
-            // // データ部生成
-
-            // // シート -> 行 -> セルの生成
  
-            // // セルの書式の生成
-            // XSSFCellStyle cellStyle = workbook.createCellStyle();
-            // XSSFFont font = workbook.createFont();
-            // font.setFontName("ＭＳ ゴシック");
-            // cellStyle.setFont(font);
-            // cell.setCellStyle(cellStyle);
- 
-            // // セルに書き込み
-            // cell.setCellValue("Hello World!\tHello World2!");
- 
-            // // ファイル書き込み
-            // workbook.write(fos);
+            // ファイル書き込み
+            workbook.write(fos);
  
             fos.close();
             workbook.close();
         }
 
     }
-
 
     public String getExportPath() {
         String exportPath
@@ -81,6 +106,12 @@ public class ExportExcel {
                 String.format("test_%s.xlsx", Util.now() )).toString();
         logger.info("exportPath : {}", exportPath);
         return exportPath;
+    }
+
+    public ExportExcel() {
+        this.workbook = new XSSFWorkbook();
+        this.sheet = workbook.createSheet();
+        this.styleFactory = new StyleFactory(workbook);
     }
 
     public static void main(String[] args) throws IOException, ParseException {
