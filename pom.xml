@@ -9,10 +9,11 @@
   <url>http://maven.apache.org</url>
 
   <properties>
-    <java.version>11</java.version>
+    <java.version>1.8</java.version>
     <maven.compiler.target>${java.version}</maven.compiler.target>
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.mainClass>sample.poi.ExportTsv</project.mainClass>
 
     <poi.version>5.2.2</poi.version>
     <apache.commons-lang3.version>3.12.0</apache.commons-lang3.version>
@@ -96,6 +97,7 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+
   <build>
     <plugins>
       <plugin>
@@ -103,6 +105,7 @@
         <artifactId>exec-maven-plugin</artifactId>
         <version>1.2.1</version>
         <configuration>
+          <mainClass>${project.mainClass}</mainClass>
         </configuration>
       </plugin>
     </plugins>
