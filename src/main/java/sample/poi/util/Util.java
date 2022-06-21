@@ -39,17 +39,15 @@ public class Util {
         // TODO データは増やす。
         List<DataModel> list = new ArrayList<DataModel>();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        int index = 1;
-        list.add(new DataModel(
-            new CommonModel(index++, "aaa", format.parse("2022-06-01"), format.parse("2022-06-02")),
-            new Group01Model("g01_value1_01", "g01_value2_01"),
-            new Group02Model("g02_value1_01", "g02_value2_01")
-        ));
-        list.add(new DataModel(
-            new CommonModel(index++, "bbb", format.parse("2022-06-03"), format.parse("2022-06-04")),
-            new Group01Model("g01_value1_02", "g01_value2_02"),
-            new Group02Model("g02_value1_02", "g02_value2_02")
-        ));
+        
+        for(int index = 1; index<10000; index++) {
+            list.add(new DataModel(
+                new CommonModel(index, "aaa", format.parse("2022-06-01"), format.parse("2022-06-02")),
+                new Group01Model(String.format("g01_value1_%d",index) , String.format("g01_value2_%d",index)),
+                new Group02Model(String.format("g02_value1_%d",index) , String.format("g02_value2_%d",index))
+            ));
+    
+        }
         return list;
     }
     

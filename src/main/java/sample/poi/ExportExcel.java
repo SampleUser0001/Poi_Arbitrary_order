@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 import java.nio.file.Paths;
 
 import sample.poi.model.data.DataModel;
+import sample.poi.model.data.DataModel.CaptionEnum;
 import sample.poi.model.disp.HeaderModel;
 import sample.poi.model.disp.ColumnInfoModel;
 import sample.poi.model.style.StyleModel;
@@ -38,6 +39,7 @@ public class ExportExcel {
     private StyleFactory styleFactory;
 
     public void exec(String[] args) throws IOException, ParseException {
+        logger.info("start");
 
         try(FileOutputStream fos = new FileOutputStream(this.getExportPath());) {
 
@@ -58,9 +60,10 @@ public class ExportExcel {
                     }
 
                     StyleModel style = new StyleModel();
-                    style.setFont(FontStyle.MS_Gothic);
+                    style.setFontStyle(FontStyle.MS_Gothic);
+                    
 
-                    logger.info(
+                    logger.debug(
                         "line:{}, column:{}, value:{}, style:{}",
                         lineCounter,
                         columnIndex,
@@ -73,21 +76,32 @@ public class ExportExcel {
                 }
             }
 
+            // ウィンドウ枠の固定
+            this.sheet.createFreezePane(COLUMN_BASE, lineCounter);
+
             // データ部生成
-            // List<DataModel> dataList = Util.getDatas();
-            // for(int i=0 ; i < dataList.size() ; i++ , lineCounter++){
-            //     XSSFRow row = this.sheet.createRow(lineCounter);
-            //     for(int j=0 ; j < columnInfoList.size() ; j++) {
-            //         final int columnIndex = j + COLUMN_BASE;
+            List<DataModel> dataList = Util.getDatas();
+            for(int i=0 ; i < dataList.size() ; i++ , lineCounter++){
+                XSSFRow row = this.sheet.createRow(lineCounter);
+                // 行番号を書く
+                if(LINE_NUMBER){
+                    XSSFCell cell = row.createCell(0);
+                    cell.setCellValue(i+1);
+                }
 
-            //         StyleModel style = new StyleModel();
-            //         style.setFont(FontStyle.MS_Gothic);
+                for(int j=0 ; j < columnInfoList.size() ; j++) {
+                    final int columnIndex = j + COLUMN_BASE;
 
-            //         XSSFCell cell = row.createCell(columnIndex);
-            //         cell.setCellStyle(this.styleFactory.create(style));
-            //         cell.setCellValue(dataList.get(i).get(columnInfoList.get(j).getCaption()));
-            //     }
-            // }
+                    // StyleModel style = new StyleModel();
+                    // style.setFont(FontStyle.MS_Gothic);
+
+                    XSSFCell cell = row.createCell(columnIndex);
+                    CaptionEnum captionEnum = CaptionEnum.valueOf(columnInfoList.get(j).getCaption());
+
+                    cell.setCellStyle(this.styleFactory.create(captionEnum.getStyle()));
+                    captionEnum.setCellValue(cell, dataList.get(i));
+                }
+            }
  
             // ファイル書き込み
             workbook.write(fos);
@@ -95,6 +109,7 @@ public class ExportExcel {
             fos.close();
             workbook.close();
         }
+        logger.info("finish");
 
     }
 
