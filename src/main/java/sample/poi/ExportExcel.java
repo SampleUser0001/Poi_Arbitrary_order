@@ -39,6 +39,7 @@ public class ExportExcel {
     private StyleFactory styleFactory;
 
     public void exec(String[] args) throws IOException, ParseException {
+        logger.info("start");
 
         try(FileOutputStream fos = new FileOutputStream(this.getExportPath());) {
 
@@ -62,7 +63,7 @@ public class ExportExcel {
                     style.setFontStyle(FontStyle.MS_Gothic);
                     
 
-                    logger.info(
+                    logger.debug(
                         "line:{}, column:{}, value:{}, style:{}",
                         lineCounter,
                         columnIndex,
@@ -74,6 +75,9 @@ public class ExportExcel {
                     cell.setCellValue(columnInfoList.get(i).getDispName().get(lineCounter).getName());
                 }
             }
+
+            // ウィンドウ枠の固定
+            this.sheet.createFreezePane(COLUMN_BASE, lineCounter);
 
             // データ部生成
             List<DataModel> dataList = Util.getDatas();
@@ -105,6 +109,7 @@ public class ExportExcel {
             fos.close();
             workbook.close();
         }
+        logger.info("finish");
 
     }
 
