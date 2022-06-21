@@ -5,9 +5,12 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
+import org.apache.poi.ss.util.CellRangeAddress;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.FileOutputStream;
 import java.util.List;
@@ -76,6 +79,9 @@ public class ExportExcel {
                 }
             }
 
+            // ヘッダセルの結合
+            this.mergeHeader(headerModel, lineCounter - headerModel.getHeaderLine(), COLUMN_BASE);
+
             // ウィンドウ枠の固定
             this.sheet.createFreezePane(COLUMN_BASE, lineCounter);
 
@@ -110,6 +116,62 @@ public class ExportExcel {
             workbook.close();
         }
         logger.info("finish");
+
+    }
+
+    public void mergeHeader(HeaderModel headerModel, int lineBase, int columnBase) {
+        List<ColumnInfoModel> columnList = headerModel.getHeaderListOrderByColumnOrder()
+                                                      .collect(Collectors.toList());
+        // 縦が同じ値の場合は結合(ヘッダ行が2行ある時のみ)
+        if(headerModel.getHeaderLine() >= 2){
+            for(int columnIndex = 0 ; columnIndex < columnList.size() ; columnIndex++){
+                
+                if(StringUtils.equals(
+                    columnList.get(columnIndex).getDispName().get(0).getName(),
+                    columnList.get(columnIndex).getDispName().get(1).getName())){
+
+                    this.sheet.addMergedRegion(
+                        new CellRangeAddress(lineBase, lineBase + 1, columnBase + columnIndex , columnBase + columnIndex )
+                    );
+                }
+            }
+        }
+
+        // 1行目のみ、横が同じ値の場合は結合
+        boolean isMerge = false;
+        int mergeStart = 0;
+        for(int columnIndex = 1; columnIndex < columnList.size() ; columnIndex++){
+            
+            logger.debug(
+                "mergeStart : {},{} ; columnIndex : {},{} ",
+                mergeStart, columnList.get(mergeStart).getDispName().get(0).getName(),
+                columnIndex, columnList.get(columnIndex).getDispName().get(0).getName());
+
+            // columnIndex自体とその左にあるヘッダが同じかどうか
+            if(StringUtils.equals(
+                columnList.get(mergeStart).getDispName().get(0).getName(),
+                columnList.get(columnIndex).getDispName().get(0).getName())){
+
+                isMerge = true;
+            } else {
+                if(isMerge) {
+                    logger.debug("merge; mergeStart : {} , columnIndex : {}", mergeStart, columnIndex -1);
+                    this.sheet.addMergedRegion(
+                        new CellRangeAddress(lineBase, lineBase, columnBase + mergeStart, columnBase + columnIndex-1 )
+                    );
+                }
+
+                isMerge = false;
+                mergeStart = columnIndex;
+            }
+        }
+        // 最終行を結合する場合の処理
+        if(isMerge) {
+            logger.debug("merge; mergeStart : {} , columnIndex : {}", mergeStart, columnList.size()-1);
+            this.sheet.addMergedRegion(
+                new CellRangeAddress(lineBase, lineBase, columnBase + mergeStart, columnBase + columnList.size()-1 )
+            );
+        }
 
     }
 
