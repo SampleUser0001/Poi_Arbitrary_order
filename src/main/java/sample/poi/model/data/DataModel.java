@@ -1,6 +1,7 @@
 package sample.poi.model.data;
 
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 
@@ -8,7 +9,12 @@ import sample.poi.model.data.CommonModel;
 import sample.poi.model.data.Group01Model;
 import sample.poi.model.data.Group02Model;
 
+import sample.poi.model.style.StyleModel;
+import sample.poi.enums.*;
+
 import org.apache.poi.xssf.usermodel.XSSFCell;
+
+import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -27,63 +33,73 @@ public class DataModel {
         return CaptionEnum.valueOf(caption).get(this);
     }
 
-    private enum CaptionEnum {
-        Column01 { 
+    public enum CaptionEnum {
+        Column01(new StyleModel(FontStyle.MS_Gothic, DateFormatStyle.None)) { 
             @Override
-            Object get(DataModel model) { return model.getCommon().getId(); }
+            Integer get(DataModel model) { return model.getCommon().getId(); }
             @Override
-            void setCellValue(XSSFCell cell, DataModel model) { cell.setCellValue(model.getCommon().getId()); }
+            public void setCellValue(XSSFCell cell, DataModel model) { cell.setCellValue(model.getCommon().getId()); }
         } ,
-        Column02 { 
+        Column02(new StyleModel(FontStyle.MS_Gothic, DateFormatStyle.None)) { 
             @Override 
-            Object get(DataModel model) { return model.getCommon().getValue(); }
+            String get(DataModel model) { return model.getCommon().getValue(); }
             @Override
-            void setCellValue(XSSFCell cell, DataModel model) { cell.setCellValue(model.getCommon().getValue()); }
+            public void setCellValue(XSSFCell cell, DataModel model) { cell.setCellValue(model.getCommon().getValue()); }
         } ,
-        From { 
+        From(new StyleModel(FontStyle.MS_Gothic, DateFormatStyle.Date_YYYYMMDD)) { 
             @Override
-            Object get(DataModel model) { return model.getCommon().getFrom(); }
+            Date get(DataModel model) { return model.getCommon().getFrom(); }
             @Override
-            void setCellValue(XSSFCell cell, DataModel model) { cell.setCellValue(model.getCommon().getFrom()); }
+            public void setCellValue(XSSFCell cell, DataModel model) { cell.setCellValue(model.getCommon().getFrom()); }
             
         } ,
-        To {
+        To(new StyleModel(FontStyle.MS_Gothic, DateFormatStyle.Date_YYYYMMDD)) {
             @Override
-            Object get(DataModel model) { return model.getCommon().getTo(); }
+            Date get(DataModel model) { return model.getCommon().getTo(); }
             @Override
-            void setCellValue(XSSFCell cell, DataModel model) { cell.setCellValue(model.getCommon().getTo()); }
+            public void setCellValue(XSSFCell cell, DataModel model) { cell.setCellValue(model.getCommon().getTo()); }
             
         } ,
-        Group01_value01 {
+        Group01_value01(new StyleModel(FontStyle.MS_Gothic, DateFormatStyle.None)) {
             @Override
-            Object get(DataModel model) { return model.getGroup01().getValue1(); }
+            String get(DataModel model) { return model.getGroup01().getValue1(); }
             @Override
-            void setCellValue(XSSFCell cell, DataModel model) { cell.setCellValue(model.getGroup01().getValue1()); }
+            public void setCellValue(XSSFCell cell, DataModel model) { cell.setCellValue(model.getGroup01().getValue1()); }
             
         } ,
-        Group01_value02 {
+        Group01_value02(new StyleModel(FontStyle.MS_Gothic, DateFormatStyle.None)) {
             @Override
-            Object get(DataModel model) { return model.getGroup01().getValue2(); }
+            String get(DataModel model) { return model.getGroup01().getValue2(); }
             @Override
-            void setCellValue(XSSFCell cell, DataModel model) { cell.setCellValue(model.getGroup01().getValue2()); }
+            public void setCellValue(XSSFCell cell, DataModel model) { cell.setCellValue(model.getGroup01().getValue2()); }
             
         } ,
-        Group02_value01 {
+        Group02_value01(new StyleModel(FontStyle.MS_Gothic, DateFormatStyle.None)) {
             @Override
-            Object get(DataModel model) { return model.getGroup02().getValue1(); }
+            String get(DataModel model) { return model.getGroup02().getValue1(); }
             @Override
-            void setCellValue(XSSFCell cell, DataModel model) { cell.setCellValue(model.getGroup02().getValue1()); }
+            public void setCellValue(XSSFCell cell, DataModel model) { cell.setCellValue(model.getGroup02().getValue1()); }
             
         } ,
-        Group02_value02 {
+        Group02_value02(new StyleModel(FontStyle.MS_Gothic, DateFormatStyle.None)) {
             @Override
-            Object get(DataModel model) { return model.getGroup02().getValue2(); }
+            String get(DataModel model) { return model.getGroup02().getValue2(); }
             @Override
-            void setCellValue(XSSFCell cell, DataModel model) { cell.setCellValue(model.getGroup02().getValue2()); }
+            public void setCellValue(XSSFCell cell, DataModel model) { cell.setCellValue(model.getGroup02().getValue2()); }
             
         };
         
+        @Getter
+        private StyleModel style;
+
+        private CaptionEnum(StyleModel style) {
+            this.style = style;
+        }
+
+        /** tsv用。実際のプログラムには不要。 */
         abstract Object get(DataModel model);
-        abstract void setCellValue(XSSFCell cell, DataModel model);
+
+        /** 渡されたcellに値を書き込む。 */
+        public abstract void setCellValue(XSSFCell cell, DataModel model);
     }
 }

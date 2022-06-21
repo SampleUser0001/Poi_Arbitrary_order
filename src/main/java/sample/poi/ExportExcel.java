@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 import java.nio.file.Paths;
 
 import sample.poi.model.data.DataModel;
+import sample.poi.model.data.DataModel.CaptionEnum;
 import sample.poi.model.disp.HeaderModel;
 import sample.poi.model.disp.ColumnInfoModel;
 import sample.poi.model.style.StyleModel;
@@ -58,7 +59,8 @@ public class ExportExcel {
                     }
 
                     StyleModel style = new StyleModel();
-                    style.setFont(FontStyle.MS_Gothic);
+                    style.setFontStyle(FontStyle.MS_Gothic);
+                    
 
                     logger.info(
                         "line:{}, column:{}, value:{}, style:{}",
@@ -77,15 +79,23 @@ public class ExportExcel {
             List<DataModel> dataList = Util.getDatas();
             for(int i=0 ; i < dataList.size() ; i++ , lineCounter++){
                 XSSFRow row = this.sheet.createRow(lineCounter);
+                // 行番号を書く
+                if(LINE_NUMBER){
+                    XSSFCell cell = row.createCell(0);
+                    cell.setCellValue(i+1);
+                }
+
                 for(int j=0 ; j < columnInfoList.size() ; j++) {
                     final int columnIndex = j + COLUMN_BASE;
 
-                    StyleModel style = new StyleModel();
-                    style.setFont(FontStyle.MS_Gothic);
+                    // StyleModel style = new StyleModel();
+                    // style.setFont(FontStyle.MS_Gothic);
 
                     XSSFCell cell = row.createCell(columnIndex);
-                    cell.setCellStyle(this.styleFactory.create(style));
-                    dataList.get(i).setCellValue(cell, columnInfoList.get(j).getCaption());
+                    CaptionEnum captionEnum = CaptionEnum.valueOf(columnInfoList.get(j).getCaption());
+
+                    cell.setCellStyle(this.styleFactory.create(captionEnum.getStyle()));
+                    captionEnum.setCellValue(cell, dataList.get(i));
                 }
             }
  

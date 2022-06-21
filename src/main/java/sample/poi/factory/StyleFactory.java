@@ -22,9 +22,8 @@ public class StyleFactory {
         if(!this.styleMemoMap.containsKey(model)) {
             XSSFCellStyle cellStyle = this.workbook.createCellStyle();
 
-            XSSFFont font = workbook.createFont();
-            font.setFontName(model.getFont().getFontName());
-            cellStyle.setFont(font);
+            model.getFontStyle().setFont(this.workbook, cellStyle);
+            model.getDateStyle().setDataFormat(this.workbook, cellStyle);
 
             this.styleMemoMap.put(model, cellStyle);
         }
