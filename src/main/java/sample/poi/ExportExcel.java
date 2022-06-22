@@ -23,7 +23,7 @@ import sample.poi.model.disp.HeaderModel;
 import sample.poi.model.disp.ColumnInfoModel;
 import sample.poi.model.style.StyleModel;
 import sample.poi.factory.StyleFactory;
-import sample.poi.enums.FontStyle;
+import sample.poi.enums.style.FontStyle;
 
 import sample.poi.util.Util;
 

@@ -10,7 +10,7 @@ import sample.poi.model.data.Group01Model;
 import sample.poi.model.data.Group02Model;
 
 import sample.poi.model.style.StyleModel;
-import sample.poi.enums.*;
+import sample.poi.enums.style.*;
 
 import org.apache.poi.xssf.usermodel.XSSFCell;
 

@@ -1,4 +1,4 @@
-package sample.poi.enums;
+package sample.poi.enums.style;
 
 import lombok.Getter;
 
@@ -15,13 +15,13 @@ public enum DateFormatStyle {
     Date_YYYYMMDD("yyyy/mm/dd"){
         @Override
         public void setDataFormat(XSSFWorkbook workbook, XSSFCellStyle cellStyle){
-            this._setDataFormat(workbook, cellStyle);
+            super._setDataFormat(workbook, cellStyle);
         }
     },
     Date_HMM("hmm"){
         @Override
         public void setDataFormat(XSSFWorkbook workbook, XSSFCellStyle cellStyle){
-            this._setDataFormat(workbook, cellStyle);
+            super._setDataFormat(workbook, cellStyle);
         }
     };
 
@@ -32,7 +32,7 @@ public enum DateFormatStyle {
     }
 
     public abstract void setDataFormat(XSSFWorkbook workbook, XSSFCellStyle cellStyle);
-    protected void _setDataFormat(XSSFWorkbook workbook, XSSFCellStyle cellStyle) {
+    private void _setDataFormat(XSSFWorkbook workbook, XSSFCellStyle cellStyle) {
         short style = workbook.getCreationHelper()
                                 .createDataFormat()
                                 .getFormat(this.format);
