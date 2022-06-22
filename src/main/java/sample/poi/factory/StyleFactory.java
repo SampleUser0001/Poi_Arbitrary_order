@@ -24,6 +24,7 @@ public class StyleFactory {
 
             model.getFontStyle().setFont(this.workbook, cellStyle);
             model.getDateStyle().setDataFormat(this.workbook, cellStyle);
+            model.getBorderStyle().setBorder(cellStyle);
 
             this.styleMemoMap.put(model, cellStyle);
         }

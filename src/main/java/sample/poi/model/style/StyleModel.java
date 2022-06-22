@@ -4,7 +4,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 
-import sample.poi.enums.*;
+import sample.poi.enums.style.*;
+import sample.poi.model.style.BorderStyleModel;
+import sample.poi.model.style.BorderDetailStyleModel;
 
 @Data
 @AllArgsConstructor
@@ -12,4 +14,5 @@ import sample.poi.enums.*;
 public class StyleModel {
     private FontStyle fontStyle = FontStyle.MS_Gothic;
     private DateFormatStyle dateStyle = DateFormatStyle.None;
+    private BorderStyleModel borderStyle = new BorderStyleModel();
 }
