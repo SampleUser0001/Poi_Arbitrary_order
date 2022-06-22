@@ -114,6 +114,9 @@ public class ExportExcel {
                 }
             }
  
+            // 列の幅調整を行う。
+            this.autoSizeColumn(0, columnInfoList.size() + COLUMN_BASE , true);
+
             // ファイル書き込み
             workbook.write(fos);
  
@@ -178,6 +181,12 @@ public class ExportExcel {
             );
         }
 
+    }
+
+    public void autoSizeColumn(int start, int finish, boolean isAutoSizeColumn){
+        for(int i=start ; i<=finish ; i++){
+            this.sheet.autoSizeColumn(i, isAutoSizeColumn);
+        }
     }
 
     public String getExportPath() {

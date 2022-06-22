@@ -27,6 +27,7 @@ public class DataModel {
     private CommonModel common;
     private Group01Model group01;
     private Group02Model group02;
+    private Group03Model group03;
     
     public void setCellValue(XSSFCell cell, String caption) throws IllegalArgumentException {
         CaptionEnum.valueOf(caption).setCellValue(cell, this);
@@ -90,6 +91,78 @@ public class DataModel {
             @Override
             public void setCellValue(XSSFCell cell, DataModel model) { cell.setCellValue(model.getGroup02().getValue2()); }
             
+        },
+        Group03_value01(new StyleModel(FontStyle.MS_Gothic, DateFormatStyle.None, DefaultBorderStyle.THIN.getBorderStyle())) {
+            @Override
+            String get(DataModel model) { return model.getGroup03().getValue1(); }
+            @Override
+            public void setCellValue(XSSFCell cell, DataModel model) { cell.setCellValue(model.getGroup03().getValue1()); }
+        },
+        Group03_value02(new StyleModel(FontStyle.MS_Gothic, DateFormatStyle.None, DefaultBorderStyle.THIN.getBorderStyle())) {
+            @Override
+            String get(DataModel model) { return model.getGroup03().getValue2(); }
+            @Override
+            public void setCellValue(XSSFCell cell, DataModel model) { cell.setCellValue(model.getGroup03().getValue2()); }
+        },
+        Group03_value03(new StyleModel(FontStyle.MS_Gothic, DateFormatStyle.None, DefaultBorderStyle.THIN.getBorderStyle())) {
+            @Override
+            String get(DataModel model) { return model.getGroup03().getValue3(); }
+            @Override
+            public void setCellValue(XSSFCell cell, DataModel model) { cell.setCellValue(model.getGroup03().getValue3()); }
+        },
+        Group03_value04(new StyleModel(FontStyle.MS_Gothic, DateFormatStyle.None, DefaultBorderStyle.THIN.getBorderStyle())) {
+            @Override
+            String get(DataModel model) { return model.getGroup03().getValue4(); }
+            @Override
+            public void setCellValue(XSSFCell cell, DataModel model) { cell.setCellValue(model.getGroup03().getValue4()); }
+        },
+        Group03_value05(new StyleModel(FontStyle.MS_Gothic, DateFormatStyle.None, DefaultBorderStyle.THIN.getBorderStyle())) {
+            @Override
+            String get(DataModel model) { return model.getGroup03().getValue5(); }
+            @Override
+            public void setCellValue(XSSFCell cell, DataModel model) { cell.setCellValue(model.getGroup03().getValue5()); }
+        },
+        Group03_value06(new StyleModel(FontStyle.MS_Gothic, DateFormatStyle.None, DefaultBorderStyle.THIN.getBorderStyle())) {
+            @Override
+            String get(DataModel model) { return model.getGroup03().getValue6(); }
+            @Override
+            public void setCellValue(XSSFCell cell, DataModel model) { cell.setCellValue(model.getGroup03().getValue6()); }
+        },
+        Group03_value07(new StyleModel(FontStyle.MS_Gothic, DateFormatStyle.None, DefaultBorderStyle.THIN.getBorderStyle())) {
+            @Override
+            String get(DataModel model) { return model.getGroup03().getValue7(); }
+            @Override
+            public void setCellValue(XSSFCell cell, DataModel model) { cell.setCellValue(model.getGroup03().getValue7()); }
+        },
+        Group03_value08(new StyleModel(FontStyle.MS_Gothic, DateFormatStyle.None, DefaultBorderStyle.THIN.getBorderStyle())) {
+            @Override
+            String get(DataModel model) { return model.getGroup03().getValue8(); }
+            @Override
+            public void setCellValue(XSSFCell cell, DataModel model) { cell.setCellValue(model.getGroup03().getValue8()); }
+        },
+        Group03_value09(new StyleModel(FontStyle.MS_Gothic, DateFormatStyle.None, DefaultBorderStyle.THIN.getBorderStyle())) {
+            @Override
+            String get(DataModel model) { return model.getGroup03().getValue9(); }
+            @Override
+            public void setCellValue(XSSFCell cell, DataModel model) { cell.setCellValue(model.getGroup03().getValue9()); }
+        },
+        Group03_value10(new StyleModel(FontStyle.MS_Gothic, DateFormatStyle.None, DefaultBorderStyle.THIN.getBorderStyle())) {
+                @Override
+                String get(DataModel model) { return model.getGroup03().getValue10(); }
+                @Override
+                public void setCellValue(XSSFCell cell, DataModel model) { cell.setCellValue(model.getGroup03().getValue10()); }
+        },
+        Group03_value11(new StyleModel(FontStyle.MS_Gothic, DateFormatStyle.None, DefaultBorderStyle.THIN.getBorderStyle())) {
+                @Override
+                String get(DataModel model) { return model.getGroup03().getValue11(); }
+                @Override
+                public void setCellValue(XSSFCell cell, DataModel model) { cell.setCellValue(model.getGroup03().getValue11()); }
+        },
+        Group03_value12(new StyleModel(FontStyle.MS_Gothic, DateFormatStyle.None, DefaultBorderStyle.THIN.getBorderStyle())) {
+                @Override
+                String get(DataModel model) { return model.getGroup03().getValue12(); }
+                @Override
+                public void setCellValue(XSSFCell cell, DataModel model) { cell.setCellValue(model.getGroup03().getValue12()); }
         };
 
         @Getter
