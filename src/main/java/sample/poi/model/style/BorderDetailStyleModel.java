@@ -9,6 +9,6 @@ import org.apache.poi.ss.usermodel.BorderStyle;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-class BorderDetailStyleModel {
-    private short type = BorderStyle.BORDER_NONE;
+public class BorderDetailStyleModel {
+    private BorderStyle type = BorderStyle.NONE;
 }

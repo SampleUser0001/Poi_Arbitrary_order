@@ -5,6 +5,8 @@ import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 
 import sample.poi.enums.style.*;
+import sample.poi.model.style.BorderStyleModel;
+import sample.poi.model.style.BorderDetailStyleModel;
 
 @Data
 @AllArgsConstructor

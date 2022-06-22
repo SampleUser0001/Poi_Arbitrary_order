@@ -6,6 +6,7 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.ss.usermodel.BorderStyle;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -23,7 +24,7 @@ import sample.poi.model.disp.HeaderModel;
 import sample.poi.model.disp.ColumnInfoModel;
 import sample.poi.model.style.StyleModel;
 import sample.poi.factory.StyleFactory;
-import sample.poi.enums.style.FontStyle;
+import sample.poi.enums.style.*;
 
 import sample.poi.util.Util;
 
@@ -36,6 +37,13 @@ public class ExportExcel {
     private static final String DELIMITER = "\t";
     /** 行番を出力するかどうか */
     private static final boolean LINE_NUMBER = true;
+
+    private static final StyleModel DEFAULT_STYLE;
+    static {
+        DEFAULT_STYLE = new StyleModel();
+        DEFAULT_STYLE.setFontStyle(FontStyle.MS_Gothic);
+        DEFAULT_STYLE.setBorderStyle(DefaultBorderStyle.THIN.getBorderStyle());
+    }
 
     private XSSFWorkbook workbook;
     private XSSFSheet sheet;
@@ -62,19 +70,15 @@ public class ExportExcel {
                         this.sheet.setColumnHidden(columnIndex, !columnInfoList.get(i).isVisible());
                     }
 
-                    StyleModel style = new StyleModel();
-                    style.setFontStyle(FontStyle.MS_Gothic);
-                    
-
                     logger.debug(
                         "line:{}, column:{}, value:{}, style:{}",
                         lineCounter,
                         columnIndex,
                         columnInfoList.get(i).getDispName().get(lineCounter).getName(),
-                        style);
+                        DEFAULT_STYLE);
 
                     XSSFCell cell = row.createCell(columnIndex);
-                    cell.setCellStyle(this.styleFactory.create(style));
+                    cell.setCellStyle(this.styleFactory.create(DEFAULT_STYLE));
                     cell.setCellValue(columnInfoList.get(i).getDispName().get(lineCounter).getName());
                 }
             }
@@ -93,6 +97,7 @@ public class ExportExcel {
                 if(LINE_NUMBER){
                     XSSFCell cell = row.createCell(0);
                     cell.setCellValue(i+1);
+                    cell.setCellStyle(this.styleFactory.create(DEFAULT_STYLE));
                 }
 
                 for(int j=0 ; j < columnInfoList.size() ; j++) {

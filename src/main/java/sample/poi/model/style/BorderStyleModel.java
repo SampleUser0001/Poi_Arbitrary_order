@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
+import sample.poi.model.style.BorderDetailStyleModel;
 
 @Data
 @AllArgsConstructor
