@@ -7,10 +7,12 @@ import lombok.AllArgsConstructor;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import sample.poi.model.style.BorderDetailStyleModel;
 
+import java.io.Serializable;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class BorderStyleModel {
+public class BorderStyleModel implements Serializable {
     private BorderDetailStyleModel top = new BorderDetailStyleModel();
     private BorderDetailStyleModel left = new BorderDetailStyleModel();
     private BorderDetailStyleModel right = new BorderDetailStyleModel();

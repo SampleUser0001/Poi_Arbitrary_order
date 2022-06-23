@@ -7,11 +7,13 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.ss.usermodel.BorderStyle;
+import org.apache.poi.ss.usermodel.IndexedColors;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.SerializationUtils;
 
 import java.io.FileOutputStream;
 import java.util.List;
@@ -77,8 +79,14 @@ public class ExportExcel {
                         columnInfoList.get(i).getDispName().get(lineCounter).getName(),
                         DEFAULT_STYLE);
 
+                    StyleModel styleModel = SerializationUtils.clone(DEFAULT_STYLE);
+                    styleModel.setCellColor(
+                        columnInfoList.get(i).isVisible()
+                        ? IndexedColors.LIGHT_GREEN.getIndex()
+                        : IndexedColors.GREY_40_PERCENT.getIndex() );
+
                     XSSFCell cell = row.createCell(columnIndex);
-                    cell.setCellStyle(this.styleFactory.create(DEFAULT_STYLE));
+                    cell.setCellStyle(this.styleFactory.create(styleModel));
                     cell.setCellValue(columnInfoList.get(i).getDispName().get(lineCounter).getName());
                 }
             }
