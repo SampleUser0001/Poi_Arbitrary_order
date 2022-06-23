@@ -47,7 +47,7 @@
             <AppenderRef ref="logfile001" />
         </Root>
         <!-- LoggerでRootとは別にpackageごとに指定できる。-->
-        <Logger name="sample.poi" level="trace" additivity="false">
+        <Logger name="sample.poi" level="info" additivity="false">
             <AppenderRef ref="logfile001" />
             <AppenderRef ref="Console" />
         </Logger>

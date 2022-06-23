@@ -10,6 +10,18 @@
         { "names": [ { "name" : "Group01"  } , { "name" : "value01"  } ] , "caption" : "Group01_value01" , "visible" : true  , "column_order" : 3 } ,
         { "names": [ { "name" : "Group01"  } , { "name" : "value02"  } ] , "caption" : "Group01_value02" , "visible" : false , "column_order" : 4 } ,
         { "names": [ { "name" : "Group02"  } , { "name" : "value01"  } ] , "caption" : "Group02_value01" , "visible" : true  , "column_order" : 7 } ,
-        { "names": [ { "name" : "Group02"  } , { "name" : "value02"  } ] , "caption" : "Group02_value02" , "visible" : true  , "column_order" : 8 } 
+        { "names": [ { "name" : "Group02"  } , { "name" : "value02"  } ] , "caption" : "Group02_value02" , "visible" : true  , "column_order" : 8 } ,
+        { "names": [ { "name" : "Group03"  } , { "name" : "value01"  } ] , "caption" : "Group03_value01" , "visible" : true  , "column_order" : 9 } ,
+        { "names": [ { "name" : "Group03"  } , { "name" : "value02"  } ] , "caption" : "Group03_value02" , "visible" : true  , "column_order" : 10 } ,
+        { "names": [ { "name" : "Group03"  } , { "name" : "value03"  } ] , "caption" : "Group03_value03" , "visible" : true  , "column_order" : 11 } ,
+        { "names": [ { "name" : "Group03"  } , { "name" : "value04"  } ] , "caption" : "Group03_value04" , "visible" : true  , "column_order" : 12 } ,
+        { "names": [ { "name" : "Group03"  } , { "name" : "value05"  } ] , "caption" : "Group03_value05" , "visible" : true  , "column_order" : 13 } ,
+        { "names": [ { "name" : "Group03"  } , { "name" : "value06"  } ] , "caption" : "Group03_value06" , "visible" : true  , "column_order" : 14 } ,
+        { "names": [ { "name" : "Group03"  } , { "name" : "value07"  } ] , "caption" : "Group03_value07" , "visible" : true  , "column_order" : 15 } ,
+        { "names": [ { "name" : "Group03"  } , { "name" : "value08"  } ] , "caption" : "Group03_value08" , "visible" : true  , "column_order" : 16 } ,
+        { "names": [ { "name" : "Group03"  } , { "name" : "value09"  } ] , "caption" : "Group03_value09" , "visible" : true  , "column_order" : 17 } ,
+        { "names": [ { "name" : "Group03"  } , { "name" : "value10"  } ] , "caption" : "Group03_value10" , "visible" : true  , "column_order" : 18 } ,
+        { "names": [ { "name" : "Group03"  } , { "name" : "value11"  } ] , "caption" : "Group03_value11" , "visible" : true  , "column_order" : 19 } ,
+        { "names": [ { "name" : "Group03"  } , { "name" : "value12"  } ] , "caption" : "Group03_value12" , "visible" : true  , "column_order" : 20 }
     ]
 }
