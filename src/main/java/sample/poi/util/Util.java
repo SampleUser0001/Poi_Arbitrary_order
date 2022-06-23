@@ -40,7 +40,7 @@ public class Util {
         List<DataModel> list = new ArrayList<DataModel>();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         
-        for(int index = 1; index<=1000; index++) {
+        for(int index = 1; index<=10000; index++) {
             list.add(new DataModel(
                 new CommonModel(index, "aaa", format.parse("2022-06-01"), format.parse("2022-06-02")),
                 new Group01Model(
