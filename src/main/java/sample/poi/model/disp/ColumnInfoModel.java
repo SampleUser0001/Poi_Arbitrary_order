@@ -22,11 +22,13 @@ public class ColumnInfoModel implements Serializable, Comparator<ColumnInfoModel
     @JsonProperty("visible")
     private boolean isVisible;
 
-    @JsonProperty("column_order")
-    private int columnOrder;
-    
     @Override
     public int compare(ColumnInfoModel order1, ColumnInfoModel order2) {
-        return order1.columnOrder - order2.columnOrder;
+        for(int i = 0; i < order1.dispName.size(); i++) {
+            if( order1.dispName.get(i).getOrder() != order2.dispName.get(i).getOrder()){
+                return order1.dispName.get(i).getOrder() - order2.dispName.get(i).getOrder();
+            } 
+        }
+        return 0;
     }
 }

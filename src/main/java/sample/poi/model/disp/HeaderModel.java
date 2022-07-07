@@ -35,7 +35,7 @@ public class HeaderModel implements Serializable {
         // TODO データのディープコピーについて確認
         return this.headerList.stream()
                               .map(column -> SerializationUtils.clone(column))
-                              .sorted(Comparator.comparing(ColumnInfoModel::getColumnOrder));
+                              .sorted(new ColumnInfoModel());
     }
     
     public String getHeaderToString(String delimiter, boolean isExistLineNumber) {

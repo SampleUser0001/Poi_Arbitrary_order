@@ -14,4 +14,5 @@ import java.io.Serializable;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ColumnDispNameModel implements Serializable {
     private String name;
+    private int order;
 }
